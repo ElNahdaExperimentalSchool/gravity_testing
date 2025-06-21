@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Newton's Gravity Testing Lab</title>
+    <style>
+        body {
+            background: radial-gradient(ellipse at center, #232526 0%, #414345 100%);
+            font-family: 'Lucida Console', monospace;
+            margin: 0;
+            padding: 20px;
+            color: #00ff00;
+            overflow-x: hidden;
+        }
+        
+        .lab-container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #00ff00;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 750px;
+            margin: 0 auto;
+            box-shadow: 0 0 30px #00ff00;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px #00ffff;
+            margin-bottom: 10px;
+        }
+        
+        .falling-object {
+            display: inline-block;
+            font-size: 30px;
+            animation: fall 3s linear infinite;
+            margin: 0 10px;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(400px);
+                opacity: 0;
+            }
+        }
+        
+        .test-result {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .danger-warning {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid #ff0000;
+            color: #ff6666;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: center;
+            animation: blink 2s infinite;
+        }
+        
+        @keyframes blink {
+            0%,
+            50% {
+                opacity: 1;
+            }
+            51%,
+            100% {
+                opacity: 0.3;
+            }
+        }
+        
+        .scientist-note {
+            background: rgba(255, 255, 0, 0.1);
+            border-left: 5px solid #ffff00;
+            color: #ffff99;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .test-button {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            font-family: inherit;
+        }
+        
+        .lab-status {
+            text-align: center;
+            margin: 20px 0;
+            color: #00ffff;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lab-container">
+        <h1>DR. NEWTON'S GRAVITY TESTING LAB</h1>
+
+        <div style="text-align: center; margin: 20px 0; height: 60px;">
+            <img class="falling-object" src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg" alt="Apple" width="40" height="40">
+            <img class="falling-object" style="animation-delay: 1s;" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png" alt="Basketball" width="40" height="40">
+            <img class="falling-object" style="animation-delay: 2s;" src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Stone.jpg" alt="Rock" width="40" height="40">
+            <img class="falling-object" style="animation-delay: 0.5s;" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Coconut.jpg" alt="Coconut" width="40" height="40">
+        </div>
+
+        <div class="lab-status">
+            [ GRAVITY STATUS: FUNCTIONAL ] - [ LAST TESTED: 0.003 seconds ago ]
+        </div>
+        <img style="margin-left: 170px;" src="data:image/webp;base64,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">
+
+
+        <div class="test-result">
+            <h3>Test #47,829: Apple Drop Experiment</h3>
+            <p><strong>Result:</strong> Apple fell down (as expected)</p>
+            <p><strong>Speed:</strong> Really fast</p>
+            <p><strong>Direction:</strong> Towards ground (shocking!)</p>
+            <p><strong>Scientist Reaction:</strong> "Yep, still working"</p>
+        </div>
+
+        <div class="test-result">
+            <h3>Test #47,830: Feather vs. Hammer</h3>
+            <p><strong>Result:</strong> Hammer won (obviously)</p>
+            <p><strong>Feather Comment:</strong> "This is unfair!"</p>
+            <p><strong>Air Resistance:</strong> Being a troublemaker again</p>
+            <p><strong>Conclusion:</strong> Gravity doesn't play favorites, but physics does</p>
+        </div>
+
+        <div class="danger-warning">
+            WARNING: DO NOT ATTEMPT TO TEST GRAVITY BY JUMPING OFF BUILDINGS<br> Our lab uses professional falling objects only!
+        </div>
+
+        <div class="scientist-note">
+            Lab Note: "After 47,830 tests, we can confirm that gravity is indeed still working. Will continue testing just to be absolutely sure." - Dr. Newton Jr.
+        </div>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <button class="test-button">Test Gravity Again</button>
+            <button class="test-button">Drop Something</button>
+            <button class="test-button">Question Physics</button>
+        </div>
+
+        <p style="text-align: center; margin-top: 20px; color: #666;">
+            <small>Lab funded by the Department of Obvious Sciences</small>
+        </p>
+    </div>
+</body>
+
+</html>
